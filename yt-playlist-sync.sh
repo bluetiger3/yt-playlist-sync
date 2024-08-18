@@ -1,13 +1,12 @@
 #!/bin/bash
 
-# Playlist stuff (CHANGE HERE)
-PLAYLIST_DIR="" # (e.g. $HOME/playlist1)
-PLAYLIST_URL="" # (e.g. https://www.youtube.com/playlist?list=f6f6432e9492e9127a4586e60c7681e99")
-
-if [ $PLAYLIST_DIR = '' || $PLAYLIST_DIR = '' ]; then
-  echo "Please edit the script to include your public YouTube playlist URL and/or local directory"
-  return 1
+if [ $# -ne 2 ]; then
+  echo "usage: $0 <directory> <url>
 fi
+
+# Playlist stuff
+PLAYLIST_DIR=$1
+PLAYLIST_URL=$2
 
 # YouTube stuff
 YT_URL="https://www.youtube.com"
