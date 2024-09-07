@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 2 ]; then
-  echo "usage: $0 <directory> <url>
+  echo "usage: $0 <directory> <url>"
 fi
 
 # Playlist stuff
