@@ -20,7 +20,7 @@ declare -p ONLINE
 if [ ${#ONLINE[@]} -eq 0 ]; then
   echo "No videos in YouTube playlist (or private)"
   echo "Terminating program early..."
-  return 1
+  exit 1
 fi
 
 # Create an array of video IDs from offline playlist
