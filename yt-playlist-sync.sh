@@ -13,13 +13,19 @@ YT_URL="https://www.youtube.com"
 WATCH_URL="$YT_URL/watch?v="
 
 # Create an array of videos IDs from online playlist
-printf  "Downloading all watch IDs..."; sleep 1; echo " (this might take a while)"
-readarray -t ONLINE < <(yt-dlp --skip-download --print id $PLAYLIST_URL 2> /dev/null)
-declare ONLINE
+printf  "Downloading watch IDs from YT playlist..."; sleep 1; echo " (this might take a while)"
+readarray -t ONLINE < <(yt-dlp --flat-playlist --print id $PLAYLIST_URL 2> /dev/null)
+declare -p ONLINE
+
+if [ ${#ONLINE[@]} -eq 0 ]; then
+  echo "No videos in YouTube playlist (or private)"
+  echo "Terminating program early..."
+  return 1
+fi
 
 # Create an array of video IDs from offline playlist
-readarray -t OFFLINE < <(ls -1 $PLAYLIST_DIR/*.mp4 | sed -E 's/.*\[([^]]+)\].*/\1/')
-declare OFFLINE
+readarray -t OFFLINE < <(ls -1 $PLAYLIST_DIR/* | sed -E 's/.*\[([^]]+)\].*/\1/')
+declare -p OFFLINE
 
 # Remove any videos no longer in online playlist
 for id in "${OFFLINE[@]}"; do
