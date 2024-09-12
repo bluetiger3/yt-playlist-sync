@@ -27,7 +27,7 @@ for id in "${OFFLINE[@]}"; do
   if [ "$?" -ne 0 ]; then
     tmp=$(find $PLAYLIST_DIR -name \*$id\*)
     echo "-$(basename "$tmp")..."
-    # rm "$tmp"
+    rm "$tmp"
   fi
 done
 echo
@@ -37,6 +37,6 @@ for id in "${ONLINE[@]}"; do
   echo ${OFFLINE[@]} | grep -q -- $id
   if [ "$?" -ne 0 ]; then
     echo "+${WATCH_URL}${id}"
-    # yt-dlp -q -f mp4 -P $PLAYLIST_DIR --playlist-random ${WATCH_URL}${id}
+    yt-dlp -q -f mp4 -P $PLAYLIST_DIR --playlist-random ${WATCH_URL}${id}
   fi
 done
